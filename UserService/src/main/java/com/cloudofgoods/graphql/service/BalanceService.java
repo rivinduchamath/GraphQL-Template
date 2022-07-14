@@ -10,7 +10,5 @@ import java.util.Map;
 @Service
 public class BalanceService {
 
-  public <U> U getBalanceFor(Map keyContexts, String userId) {
-    return null;
-  }
+
 }

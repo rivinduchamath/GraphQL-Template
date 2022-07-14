@@ -20,32 +20,34 @@ import java.util.UUID;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CustomGraphQLContextBuilder implements GraphQLServletContextBuilder {
-
-  private final DataLoaderRegistryFactory dataLoaderRegistryFactory;
-
-  @Override
-  public GraphQLContext build(HttpServletRequest httpServletRequest,
-      HttpServletResponse httpServletResponse) {
-
-
-    return null;
-  }
-
-  /**
-   * Subscription (Chapter 33)
-   */
-  @Override
-  public GraphQLContext build(Session session, HandshakeRequest handshakeRequest) {
-    return DefaultGraphQLWebSocketContext.createWebSocketContext()
-        .with(session)
-        .with(handshakeRequest)
-        .build();
-  }
-
-  @Override
-  public GraphQLContext build() {
-    throw new IllegalStateException("Unsupported");
-  }
+public class CustomGraphQLContextBuilder
+//        implements GraphQLServletContextBuilder
+{
+//
+//  private final DataLoaderRegistryFactory dataLoaderRegistryFactory;
+//
+//  @Override
+//  public GraphQLContext build(HttpServletRequest httpServletRequest,
+//      HttpServletResponse httpServletResponse) {
+//
+//
+//    return null;
+//  }
+//
+//  /**
+//   * Subscription (Chapter 33)
+//   */
+//  @Override
+//  public GraphQLContext build(Session session, HandshakeRequest handshakeRequest) {
+//    return DefaultGraphQLWebSocketContext.createWebSocketContext()
+//        .with(session)
+//        .with(handshakeRequest)
+//        .build();
+//  }
+//
+//  @Override
+//  public GraphQLContext build() {
+//    throw new IllegalStateException("Unsupported");
+//  }
 
 }
