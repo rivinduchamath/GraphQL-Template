@@ -1,0 +1,5 @@
+type CommonUserDetails{
+    userId : ID!
+    userName : String
+    userMobileNumber : String
+}
