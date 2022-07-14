@@ -8,29 +8,33 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "vendor_profiles")
+@Table(name = "customer_profiles")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vendor {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nik_Name")
+    @Column(name = "zip_Code")
     @Size(max = 15)
-    private String nikName;
+    private String zipCode;
 
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId
-    @JoinColumn(name = "vendor_Id",  insertable = false, updatable = false, nullable = false)
+    @JoinColumn(name = "customer_Id", insertable = false, updatable = false, nullable = false)
     private CommonUserEntity commonUser;
 
-    public Vendor(String nikName) {
-        this.nikName = nikName;
+    public Customer(String zipCode) {
+        this.zipCode = zipCode;
     }
 
 
+
+    public void setCommonUser(CommonUserEntity commonUser) {
+        this.commonUser = commonUser;
+    }
 }
