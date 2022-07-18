@@ -1,0 +1,11 @@
+#spring:
+#  application:
+#    name: cog-graphql-java
+#
+#server:
+#  http2:
+#    enabled: true
+#
+#graphql:
+#  tools:
+#    schema-location-pattern:
