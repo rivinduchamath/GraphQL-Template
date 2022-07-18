@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "vendor_profiles")
+//@Table(name = "vendor_entity")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,19 +18,18 @@ public class Vendor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nik_Name")
     @Size(max = 15)
     private String nikName;
 
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @MapsId
-    @JoinColumn(name = "vendor_Id",  insertable = false, updatable = false, nullable = false)
-    private CommonUserEntity commonUser;
+    @OneToOne(fetch = FetchType.LAZY, optional = false ,
+            mappedBy = "vendorProfileData")
+    //@MapsId
+    @JoinColumn(insertable = false, updatable = false, nullable = false)
+    private UserEntity userEntity;
 
     public Vendor(String nikName) {
         this.nikName = nikName;
     }
-
 
 }

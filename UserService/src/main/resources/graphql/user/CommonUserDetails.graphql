@@ -1,5 +1,5 @@
-type CommonUserDetails{
-    commonUserId : ID!
+type UserEntity{
+    id : ID!
     userName : String
     userMobileNumber : String
 
