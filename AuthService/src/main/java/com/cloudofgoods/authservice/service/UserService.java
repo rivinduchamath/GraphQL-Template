@@ -1,8 +1,11 @@
 package com.cloudofgoods.authservice.service;
 
+import com.cloudofgoods.authservice.entity.AuthContentType;
+import com.cloudofgoods.authservice.entity.AuthPermission;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
 
+import java.util.Date;
 import java.util.List;
 
 public interface UserService {
@@ -15,4 +18,9 @@ public interface UserService {
     AuthRole saveAuthRole(AuthRole role);
 
     void addRoleToUser(String email, String roleName);
+
+
+    AuthPermission saveAuthPermission(AuthPermission xyz);
+
+    AuthContentType saveAuthContentType(AuthContentType authContentType);
 }

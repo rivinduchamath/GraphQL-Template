@@ -1,11 +1,7 @@
 package com.cloudofgoods.authservice.service.serviceimpl;
 
-import com.cloudofgoods.authservice.entity.AuthRole;
-import com.cloudofgoods.authservice.entity.AuthUser;
-import com.cloudofgoods.authservice.entity.AuthUserAuthRole;
-import com.cloudofgoods.authservice.repository.AuthRoleDAO;
-import com.cloudofgoods.authservice.repository.AuthUserAuthRoleDAO;
-import com.cloudofgoods.authservice.repository.AuthUserDAO;
+import com.cloudofgoods.authservice.entity.*;
+import com.cloudofgoods.authservice.repository.*;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +24,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     // Implement UserDetailsService interface to Load Users From Database
     private final AuthUserDAO authUserDAO;
     private final AuthRoleDAO authRoleDAO;
-    private final PasswordEncoder passwordEncoder;
 
+    private final PasswordEncoder passwordEncoder;
+    private final AuthPermissionDAO authPermissionDAO;
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
 
+    private final AuthContentTypeDAO authContentTypeDAO;
     @Override
     public List<AuthUser> getAuthUsers() {
         log.info("Get All Users");
@@ -67,6 +65,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         authUserAuthRole.setAuthRole(role);
         authUserAuthRoleDAO.save(authUserAuthRole);
     }
+
+    @Override
+    public AuthPermission saveAuthPermission(AuthPermission xyz) {
+        log.info("Inside the Save Role " + xyz.getName());
+        return authPermissionDAO.save(xyz);
+    }
+
+    @Override
+    public AuthContentType saveAuthContentType(AuthContentType authContentType) {
+        log.info("Inside the Save Role " + authContentType.getModelName());
+        return authContentTypeDAO.save(authContentType);
+    }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

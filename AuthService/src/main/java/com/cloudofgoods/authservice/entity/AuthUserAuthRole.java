@@ -18,7 +18,7 @@ public class AuthUserAuthRole {
     @EmbeddedId
     private AuthUserAuthRolePK authRolePK;
     @ManyToOne
-   @MapsId("userId")
+    @MapsId("userId")
     //@JoinColumn( referencedColumnName = "id", insertable = false, updatable = false)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private AuthUser authUser;

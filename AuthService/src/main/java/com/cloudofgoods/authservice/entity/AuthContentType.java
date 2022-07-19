@@ -28,4 +28,12 @@ public class AuthContentType {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    public AuthContentType(Long id, String appLabel, String modelName, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.appLabel = appLabel;
+        this.modelName = modelName;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

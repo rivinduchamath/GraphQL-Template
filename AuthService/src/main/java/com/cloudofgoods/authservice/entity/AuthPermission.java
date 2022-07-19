@@ -37,4 +37,13 @@ public class AuthPermission {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    public AuthPermission(Long id, String name, String code, AuthContentType authContentType, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.authContentType = authContentType;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

@@ -1,5 +1,6 @@
 package com.cloudofgoods.authservice.entity;
 
+import com.cloudofgoods.authservice.entity.embeddable.AuthRoleAuthPermissionPK;
 import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthPermissionPK;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,18 @@ public class AuthUserAuthPermission {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    public AuthUserAuthPermission(Long authUserId, Long authPermissionId, Date createdAt, Date updatedAt) {
+        this.authPermissionPK = new AuthUserAuthPermissionPK(authUserId,authPermissionId);
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public AuthUserAuthPermission(AuthUserAuthPermissionPK authPermissionPK, Date createdAt, Date updatedAt) {
+        this.authPermissionPK = authPermissionPK;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     @Override
     public boolean equals(Object o) {
