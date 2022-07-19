@@ -1,4 +1,0 @@
-# All available queries on this graphql server
-type Query {
-    UserEntity(id: ID): UserEntity
-}

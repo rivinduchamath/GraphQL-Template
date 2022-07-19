@@ -5,6 +5,7 @@ import com.cloudofgoods.authservice.repository.*;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public AuthUser saveAuthUser(AuthUser user) {
         log.info("Inside the Save User " + user.getEmail());
-        //  user.setPassword(passwordEncoder.encode(user.getPassword()));
+         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return authUserDAO.save(user);
     }
 
@@ -107,7 +107,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        AuthUser user = authUserDAO.findAuthUserByEmail(userName);
+        if (user == null) {
+            log.error("User Name " + userName + " Not Found in the database");
+            throw new UsernameNotFoundException("User Not Found on database");
+        } else {
+            log.info("User Name " + userName + " Found in the database");
+        }
+        // Create Collection to add Authorities of User
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        user.getAuthUserAuthRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getAuthRole().getName()));
+        });
+        // Return Username, Password List of authorities
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 }

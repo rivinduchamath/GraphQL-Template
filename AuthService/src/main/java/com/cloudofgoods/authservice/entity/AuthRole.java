@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
@@ -22,13 +19,13 @@ public class AuthRole {
     @OneToMany(mappedBy = "authRole")
     private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
 
-    @OneToMany(mappedBy = "authRole", cascade = CascadeType.PERSIST)
-    private Set<AuthUserAuthRole> authUserAuthRoles = new HashSet<>();
+    @OneToMany(mappedBy = "authRole")
+    private Collection<AuthUserAuthRole> authUserAuthRoles = new HashSet<>();
 
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 

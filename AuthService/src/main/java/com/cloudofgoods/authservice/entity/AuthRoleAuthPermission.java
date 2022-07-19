@@ -1,14 +1,12 @@
 package com.cloudofgoods.authservice.entity;
 
 import com.cloudofgoods.authservice.entity.embeddable.AuthRoleAuthPermissionPK;
-import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthRolePK;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -27,10 +25,10 @@ public class AuthRoleAuthPermission {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private AuthPermission authPermission;
 
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 

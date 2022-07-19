@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 
 @Entity
@@ -20,17 +20,16 @@ public class AuthUserAuthRole {
     @ManyToOne
     @MapsId("userId")
     //@JoinColumn( referencedColumnName = "id", insertable = false, updatable = false)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private AuthUser authUser;
     @ManyToOne
     @MapsId("roleId")
    // @JoinColumn( referencedColumnName = "id", insertable = false, updatable = false)
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+
     private AuthRole authRole;
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 

@@ -1,6 +1,0 @@
-type UserEntity{
-    id : ID!
-    userName : String
-    userMobileNumber : String
-
-}

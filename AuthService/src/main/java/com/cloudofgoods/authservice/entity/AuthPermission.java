@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,10 +32,10 @@ public class AuthPermission {
     @OneToMany(mappedBy="authPermission")
     private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
 
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @NotNull
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
