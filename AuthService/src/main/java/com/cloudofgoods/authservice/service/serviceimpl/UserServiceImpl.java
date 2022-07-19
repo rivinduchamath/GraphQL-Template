@@ -24,7 +24,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class UserServiceImpl  implements UserService , UserDetailsService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     // UserService to Implement Crud to Loosely Coupling
     // Implement UserDetailsService interface to Load Users From Database
     private final AuthUserDAO authUserDAO;
@@ -32,6 +32,7 @@ public class UserServiceImpl  implements UserService , UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
+
     @Override
     public List<AuthUser> getAuthUsers() {
         log.info("Get All Users");
@@ -47,7 +48,7 @@ public class UserServiceImpl  implements UserService , UserDetailsService {
     @Override
     public AuthUser saveAuthUser(AuthUser user) {
         log.info("Inside the Save User " + user.getEmail());
-      //  user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //  user.setPassword(passwordEncoder.encode(user.getPassword()));
         return authUserDAO.save(user);
     }
 
@@ -62,7 +63,7 @@ public class UserServiceImpl  implements UserService , UserDetailsService {
         AuthUser user = authUserDAO.findAuthUserByEmail(userName);
         AuthRole role = authRoleDAO.findRoleByName(roleName);
         log.info("Add Role " + roleName + " to the User " + userName);
-        AuthUserAuthRole authUserAuthRole = new AuthUserAuthRole(user.getId(),role.getId(),new Date(), new Date());
+        AuthUserAuthRole authUserAuthRole = new AuthUserAuthRole(user.getId(), role.getId(), new Date(), new Date());
         authUserAuthRole.setAuthUser(user);
         authUserAuthRole.setAuthRole(role);
         authUserAuthRoleDAO.save(authUserAuthRole);
