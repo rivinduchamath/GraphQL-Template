@@ -12,7 +12,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class AuthUserAuthPermissionId implements Serializable {
+public class AuthUserAuthPermissionPK implements Serializable {
 
     private Long authPermissionId;
     private Long authUserId;
@@ -25,7 +25,7 @@ public class AuthUserAuthPermissionId implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        AuthUserAuthPermissionId that = (AuthUserAuthPermissionId) o;
+        AuthUserAuthPermissionPK that = (AuthUserAuthPermissionPK) o;
         return Objects.equals(authPermissionId, that.authPermissionId) &&
                 Objects.equals(authUserId, that.authUserId);
     }

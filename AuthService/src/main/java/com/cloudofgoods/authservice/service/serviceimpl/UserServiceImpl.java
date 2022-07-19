@@ -3,7 +3,6 @@ package com.cloudofgoods.authservice.service.serviceimpl;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
 import com.cloudofgoods.authservice.entity.AuthUserAuthRole;
-import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthRoleId;
 import com.cloudofgoods.authservice.repository.AuthRoleDAO;
 import com.cloudofgoods.authservice.repository.AuthUserAuthRoleDAO;
 import com.cloudofgoods.authservice.repository.AuthUserDAO;

@@ -1,6 +1,6 @@
 package com.cloudofgoods.authservice.entity;
 
-import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthPermissionId;
+import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthPermissionPK;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Objects;
 public class AuthUserAuthPermission {
 
     @EmbeddedId
-    private AuthUserAuthPermissionId id;
+    private AuthUserAuthPermissionPK authPermissionPK;
     @ManyToOne
     @MapsId("authUserId")
     private AuthUser authUser;
