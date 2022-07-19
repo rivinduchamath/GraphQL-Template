@@ -1,4 +1,4 @@
-package com.cloudofgoods.authservice.entity;
+package com.cloudofgoods.authservice.entity.embeddable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

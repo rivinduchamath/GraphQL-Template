@@ -1,5 +1,6 @@
 package com.cloudofgoods.authservice.entity;
 
+import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthRoleId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
