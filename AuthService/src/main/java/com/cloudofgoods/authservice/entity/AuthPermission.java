@@ -16,6 +16,7 @@ import java.util.Set;
 @Data
 public class AuthPermission {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
     private String name;

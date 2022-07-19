@@ -16,6 +16,7 @@ import java.util.Set;
 @Data
 public class AuthContentType {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String appLabel;
     private String modelName;

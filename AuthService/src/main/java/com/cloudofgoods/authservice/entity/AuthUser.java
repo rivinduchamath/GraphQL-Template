@@ -16,6 +16,7 @@ import java.util.Set;
 @Data
 public class AuthUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false, unique = true)
     private String email;
@@ -34,4 +35,11 @@ public class AuthUser {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    public AuthUser(Long id, String email, String password, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

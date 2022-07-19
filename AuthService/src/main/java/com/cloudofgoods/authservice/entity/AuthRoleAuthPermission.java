@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 public class AuthRoleAuthPermission {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)

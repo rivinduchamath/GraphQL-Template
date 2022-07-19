@@ -16,12 +16,13 @@ import java.util.Set;
 @Data
 public class AuthRole {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     @OneToMany(mappedBy = "authRole")
     private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
 
-    @OneToMany(mappedBy = "authPermission", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "authRole", cascade = CascadeType.PERSIST)
     private Set<AuthUserAuthRole> authUserAuthRoles = new HashSet<>();
 
     @NotNull
@@ -31,4 +32,10 @@ public class AuthRole {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
+    public AuthRole(Long id, String name, Date createdAt, Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }
