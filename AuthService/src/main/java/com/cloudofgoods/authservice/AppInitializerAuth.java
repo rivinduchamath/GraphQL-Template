@@ -57,7 +57,9 @@ public class AppInitializerAuth {
 
             service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", authContentType, new Date(), new Date()));
 
+            service.saveAuthRoleAuthPermission("1234","ROLE_USER");
 
+            service.saveAuthUserAuthPermission("john@gmail.com","1234");
         };
     }
 }

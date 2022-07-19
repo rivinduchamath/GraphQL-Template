@@ -20,6 +20,7 @@ public class AuthPermission {
     private Long id;
     @Column(nullable = false)
     private String name;
+    @Column(unique = true)
     private String code;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)

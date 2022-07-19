@@ -23,4 +23,8 @@ public interface UserService {
     AuthPermission saveAuthPermission(AuthPermission xyz);
 
     AuthContentType saveAuthContentType(AuthContentType authContentType);
+
+    void saveAuthRoleAuthPermission(String authPermissionCode, String roleName);
+
+    void saveAuthUserAuthPermission(String email, String code);
 }

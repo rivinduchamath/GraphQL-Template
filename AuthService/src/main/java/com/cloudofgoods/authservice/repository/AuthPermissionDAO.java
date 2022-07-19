@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface AuthPermissionDAO extends JpaRepository<AuthPermission,Long>
 
     {
-}
+        AuthPermission findAuthPermissionByCode(String authPermissionCode);
+    }

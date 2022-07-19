@@ -28,8 +28,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final AuthPermissionDAO authPermissionDAO;
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
-
     private final AuthContentTypeDAO authContentTypeDAO;
+
+    private final AuthUserAuthPermissionDAO authUserAuthPermissionDAO;
+    private final AuthRoleAuthPermissionDAO authRoleAuthPermissionDAO;
     @Override
     public List<AuthUser> getAuthUsers() {
         log.info("Get All Users");
@@ -78,6 +80,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return authContentTypeDAO.save(authContentType);
     }
 
+    @Override
+    public void saveAuthRoleAuthPermission(String authPermissionCode, String roleName) {
+        AuthPermission authPermission = authPermissionDAO.findAuthPermissionByCode(authPermissionCode);
+        AuthRole role = authRoleDAO.findRoleByName(roleName);
+        log.info("Add Role " + authPermissionCode + " to the User " + roleName);
+        AuthRoleAuthPermission authUserAuthRole = new AuthRoleAuthPermission(role.getId(), authPermission.getId(), new Date(), new Date());
+        authUserAuthRole.setAuthPermission(authPermission);
+        authUserAuthRole.setAuthRole(role);
+        authRoleAuthPermissionDAO.save(authUserAuthRole);
+    }
+
+    @Override
+    public void saveAuthUserAuthPermission(String email, String authPermissionCode) {
+        AuthUser user = authUserDAO.findAuthUserByEmail(email);
+        AuthPermission authPermission = authPermissionDAO.findAuthPermissionByCode(authPermissionCode);
+        log.info("Add Role " + authPermissionCode + " to the User " + email);
+        AuthUserAuthPermission authUserAuthPermission = new AuthUserAuthPermission(user.getId(), authPermission.getId(), new Date(), new Date());
+        authUserAuthPermission.setAuthPermission(authPermission);
+        authUserAuthPermission.setAuthUser(user);
+        authUserAuthPermissionDAO.save(authUserAuthPermission);
+
+
+
+    }
 
 
     @Override
