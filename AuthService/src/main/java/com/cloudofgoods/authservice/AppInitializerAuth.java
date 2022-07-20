@@ -1,7 +1,7 @@
 package com.cloudofgoods.authservice;
 
 
-import com.cloudofgoods.authservice.entity.AuthContentType;
+
 import com.cloudofgoods.authservice.entity.AuthPermission;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
@@ -52,10 +52,10 @@ public class AppInitializerAuth {
             service.addRoleToUser("Kamal", "ROLE_ADMIN");
             service.addRoleToUser("AMri", "ROLE_ADMIN");
 
-            service.saveAuthContentType(new AuthContentType(null, "AppLabel", "ModelName", new Date(), new Date()));
-            AuthContentType authContentType = service.saveAuthContentType(new AuthContentType(null, "AppLabel2", "ModelName2", new Date(), new Date()));
+           // service.saveAuthContentType(new AuthContentType(null, "AppLabel", "ModelName", new Date(), new Date()));
+            //AuthContentType authContentType = service.saveAuthContentType(new AuthContentType(null, "AppLabel2", "ModelName2", new Date(), new Date()));
 
-            service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", authContentType, new Date(), new Date()));
+            service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", new Date(), new Date()));
 
             service.saveAuthRoleAuthPermission("1234","ROLE_USER");
 

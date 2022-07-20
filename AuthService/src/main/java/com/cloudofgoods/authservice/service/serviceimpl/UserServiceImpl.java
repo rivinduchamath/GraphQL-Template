@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final AuthPermissionDAO authPermissionDAO;
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
-    private final AuthContentTypeDAO authContentTypeDAO;
+//    private final AuthContentTypeDAO authContentTypeDAO;
 
     private final AuthUserAuthPermissionDAO authUserAuthPermissionDAO;
     private final AuthRoleAuthPermissionDAO authRoleAuthPermissionDAO;
@@ -74,11 +74,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return authPermissionDAO.save(xyz);
     }
 
-    @Override
-    public AuthContentType saveAuthContentType(AuthContentType authContentType) {
-        log.info("Inside the Save Role " + authContentType.getModelName());
-        return authContentTypeDAO.save(authContentType);
-    }
 
     @Override
     public void saveAuthRoleAuthPermission(String authPermissionCode, String roleName) {
@@ -101,11 +96,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         authUserAuthPermission.setAuthUser(user);
         authUserAuthPermissionDAO.save(authUserAuthPermission);
 
-
-
     }
-
-
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         AuthUser user = authUserDAO.findAuthUserByEmail(userName);

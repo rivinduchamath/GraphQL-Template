@@ -22,9 +22,9 @@ public class AuthPermission {
     private String name;
     @Column(unique = true)
     private String code;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(nullable = false)
-    private AuthContentType authContentType;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(nullable = false)
+//    private AuthContentType authContentType;
 
     @OneToMany(mappedBy = "authPermission", cascade = CascadeType.PERSIST)
     private Set<AuthUserAuthPermission> authUsers = new HashSet<>();
@@ -39,11 +39,13 @@ public class AuthPermission {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    public AuthPermission(Long id, String name, String code, AuthContentType authContentType, Date createdAt, Date updatedAt) {
+    public AuthPermission(Long id, String name, String code,
+                          //AuthContentType authContentType,
+                          Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.code = code;
-        this.authContentType = authContentType;
+//        this.authContentType = authContentType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

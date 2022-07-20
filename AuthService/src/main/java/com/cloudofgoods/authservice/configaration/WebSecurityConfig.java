@@ -43,6 +43,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {/* WebSecur
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder); // Defined PasswordEncoder bean in Main Class
     }
 
+    private static final String[] PUBLIC_URLS = {
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/v5/api-docs",
+            "/webjars/**"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter =
@@ -52,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {/* WebSecur
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         // Allow to access Request from Below any URLs
         http.authorizeRequests().antMatchers("/api/v5/login/**","/api/v5/token/refresh/**").permitAll();
-        http.authorizeRequests().antMatchers("/swagger-ui.html/**").permitAll();
+        http.authorizeRequests().antMatchers(PUBLIC_URLS).permitAll();
         // Allow to access Request from Below URLs with having authorized Roles
         http.authorizeRequests().antMatchers(GET, "/api/v5/user/**").hasAnyAuthority("ROLE_USER");
         http.authorizeRequests().antMatchers(POST, "/api/v5/user/save/**").hasAnyAuthority("ROLE_ADMIN");

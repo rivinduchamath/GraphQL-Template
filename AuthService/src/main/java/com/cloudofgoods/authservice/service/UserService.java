@@ -1,6 +1,6 @@
 package com.cloudofgoods.authservice.service;
 
-import com.cloudofgoods.authservice.entity.AuthContentType;
+
 import com.cloudofgoods.authservice.entity.AuthPermission;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
@@ -22,7 +22,7 @@ public interface UserService {
 
     AuthPermission saveAuthPermission(AuthPermission xyz);
 
-    AuthContentType saveAuthContentType(AuthContentType authContentType);
+
 
     void saveAuthRoleAuthPermission(String authPermissionCode, String roleName);
 
