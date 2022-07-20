@@ -1,6 +1,7 @@
 package com.cloudofgoods.authservice.entity;
 
 import com.cloudofgoods.authservice.entity.embeddable.AuthUserAuthRolePK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,15 @@ import java.util.Date;
 public class AuthUserAuthRole {
     @EmbeddedId
     private AuthUserAuthRolePK authRolePK;
-    @ManyToOne
-    @MapsId("userId")
-    //@JoinColumn( referencedColumnName = "id", insertable = false, updatable = false)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER )
+ //   @MapsId("userId")
+ @JoinColumn(name = "auth_user_id",insertable = false, updatable = false)
     private AuthUser authUser;
-    @ManyToOne
-    @MapsId("roleId")
-   // @JoinColumn( referencedColumnName = "id", insertable = false, updatable = false)
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER )
+  //@MapsId("roleId")
+   @JoinColumn(name = "auth_role_id",insertable = false, updatable = false)
     private AuthRole authRole;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -38,6 +40,14 @@ public class AuthUserAuthRole {
         this.updatedAt = updatedAt;
     }
 
+    public AuthRole getAuthRole() {
+        return authRole;
+    }
+
+    public void setAuthRole(AuthRole authRole) {
+        this.authRole = authRole;
+    }
+
     public AuthUserAuthRole(AuthUserAuthRolePK authRolePK, Date createdAt, Date updatedAt) {
         this.authRolePK = authRolePK;
         this.createdAt = createdAt;
@@ -46,6 +56,7 @@ public class AuthUserAuthRole {
     public AuthUserAuthRole(AuthUser authUser, AuthRole authRole, Date createdAt, Date updatedAt) {
         this.authUser = authUser;
         this.authRole = authRole;
+        this.authRolePK = new AuthUserAuthRolePK(authRole.getId(), authUser.getId());
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

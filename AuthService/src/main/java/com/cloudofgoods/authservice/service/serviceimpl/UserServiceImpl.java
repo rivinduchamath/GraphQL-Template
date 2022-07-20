@@ -1,10 +1,12 @@
 package com.cloudofgoods.authservice.service.serviceimpl;
 
 import com.cloudofgoods.authservice.entity.*;
+import com.cloudofgoods.authservice.entity.LoadAllDataWithRoles;
 import com.cloudofgoods.authservice.repository.*;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,6 +31,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final AuthPermissionDAO authPermissionDAO;
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
     private final AuthRoleAuthPermissionDAO authRoleAuthPermissionDAO;
+
+    private final  CustomDAO customDAO;
+
+
+
+
     @Override
     public List<AuthUser> getAuthUsers() {
         log.info("Get All Users");
@@ -40,6 +48,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Get All Roles");
         return authRoleDAO.findAll();
     }
+//
+//    @Transactional(readOnly = true)
+//    @Override
+//    public List<OrderDTO2> getOrderInfo(String query)  {
+//        List<CustomEntity> ordersInfo = queryDAO.getOrdersInfo(query + "%");
+//        List<OrderDTO2> dtos = new ArrayList<>();
+//        for (CustomEntity info : ordersInfo) {
+//            dtos.add(new OrderDTO2(info.getOrderId(),
+//                    new java.sql.Date(info.getOrderDate().getTime()), info.getCustomerId(), info.getCustomerName(), info.getOrderTotal()));
+//        }
+//        return dtos;
+//    }
+    @Override
+    public List<LoadAllDataWithRoles> getUserWithRoles() {
+        log.info("Get All Roles");
+        List<LoadAllDataWithRoles> ordersInfo = customDAO.getOrdersInfo( );
+       // List<LoadAllDataWithRoles> alla = authRoleDAO.findAlla();
+        for (LoadAllDataWithRoles a:ordersInfo){
+            System.out.println(a);
+        }
+
+        return null;
+    }
+
 
     @Override
     public AuthUser saveAuthUser(AuthUser user) {
@@ -59,7 +91,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         AuthUser user = authUserDAO.findAuthUserByEmail(userName);
         AuthRole role = authRoleDAO.findRoleByName(roleName);
         log.info("Add Role " + roleName + " to the User " + userName);
-        AuthUserAuthRole authUserAuthRole = new AuthUserAuthRole(user.getId(), role.getId(), new Date(), new Date());
+        AuthUserAuthRole authUserAuthRole = new AuthUserAuthRole(user, role, new Date(), new Date());
         authUserAuthRole.setAuthUser(user);
         authUserAuthRole.setAuthRole(role);
         authUserAuthRoleDAO.save(authUserAuthRole);
@@ -82,6 +114,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         authUserAuthRole.setAuthRole(role);
         authRoleAuthPermissionDAO.save(authUserAuthRole);
     }
+
 
 
     @Override

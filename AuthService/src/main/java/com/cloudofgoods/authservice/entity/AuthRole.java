@@ -1,26 +1,31 @@
 package com.cloudofgoods.authservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AuthRole {
+public class AuthRole implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "authRole")
-    private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "authRole")
-    private Collection<AuthUserAuthRole> authUserAuthRoles = new HashSet<>();
+    private List<AuthRoleAuthPermission> authRoleAuthPermissions=new ArrayList<>();;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "authRole" , orphanRemoval = true)
+    private List<AuthUserAuthRole> authUserAuthRoles=new ArrayList<>();;
 
 
     @Temporal(TemporalType.TIMESTAMP)

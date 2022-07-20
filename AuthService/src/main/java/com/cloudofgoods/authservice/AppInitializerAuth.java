@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Date;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -54,6 +55,7 @@ public class AppInitializerAuth {
             service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", new Date(), new Date()));
 
             service.saveAuthRoleAuthPermission("1234","ROLE_USER");
+
 
         };
     }

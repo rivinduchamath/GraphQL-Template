@@ -3,6 +3,7 @@ package com.cloudofgoods.authservice.controller;
 import com.cloudofgoods.authservice.dto.RoleToUserForm;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
+import com.cloudofgoods.authservice.entity.LoadAllDataWithRoles;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,15 @@ import java.util.List;
 public class AuthController {
 
     private final UserService userService;
+
+    @GetMapping("/usersAll")
+    // ResponseEntity represents an HTTP response, including headers, body, and status
+    // ResponseEntity from spring-web dependency
+    // Method include Get User Object
+    public ResponseEntity<List<LoadAllDataWithRoles>> getUserWithRoles() {
+        return ResponseEntity.ok().body(userService.getUserWithRoles());
+    }
+
 
     @GetMapping("/users")
     // ResponseEntity represents an HTTP response, including headers, body, and status

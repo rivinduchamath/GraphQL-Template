@@ -35,11 +35,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     private final AuthenticationManager authenticationManager;// want to Call Authentication manager
 
     public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+        System.out.println("CustomAuthenticationFilter-------------------------");
         this.authenticationManager = authenticationManager;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        System.out.println("attemptAuthentication----------------------------");
         String userName = request.getParameter("username");
         String password = request.getParameter("password");
         log.info("UserName is: {}", userName);
@@ -57,7 +59,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user = (User) authResult.getPrincipal(); // User object From Spring Security. The identity of the principal being authenticated
         Algorithm algorithm = Algorithm.HMAC256("Cpt.Chamath.jwt-secret@ILABS06-05-2022".getBytes());// From JWT Dependency. HMACSHA256 is a type of keyed hash algorithm that is constructed from the SHA-256 hash function and used as a Hash-based Message Authentication Code (HMAC).
-
+        System.out.println("successfulAuthentication-------------------------------");
         String access_token = JWT.create()
                 .withSubject(user.getUsername()) // All UserNames are Unique
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))// Expire Time Mile Sec

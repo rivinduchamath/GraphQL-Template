@@ -1,5 +1,6 @@
 package com.cloudofgoods.authservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,9 @@ public class AuthUser {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "authUser")
-    Collection<AuthUserAuthRole> authUserAuthRoles = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "authUser" )
+    Collection<AuthUserAuthRole> authUserAuthRoles = new ArrayList<>();
 
 
     @Temporal(TemporalType.TIMESTAMP)
