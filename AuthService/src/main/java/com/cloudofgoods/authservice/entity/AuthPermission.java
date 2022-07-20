@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,12 +21,6 @@ public class AuthPermission {
     private String name;
     @Column(unique = true)
     private String code;
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(nullable = false)
-//    private AuthContentType authContentType;
-
-//    @OneToMany(mappedBy = "authPermission", cascade = CascadeType.PERSIST)
-//    private Set<AuthUserAuthPermission> authUsers = new HashSet<>();
 
     @OneToMany(mappedBy="authPermission")
     private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
@@ -39,12 +32,10 @@ public class AuthPermission {
     private Date updatedAt;
 
     public AuthPermission(Long id, String name, String code,
-                          //AuthContentType authContentType,
                           Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
         this.code = code;
-//        this.authContentType = authContentType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }

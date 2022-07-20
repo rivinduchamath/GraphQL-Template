@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -52,14 +51,10 @@ public class AppInitializerAuth {
             service.addRoleToUser("Kamal", "ROLE_ADMIN");
             service.addRoleToUser("AMri", "ROLE_ADMIN");
 
-           // service.saveAuthContentType(new AuthContentType(null, "AppLabel", "ModelName", new Date(), new Date()));
-            //AuthContentType authContentType = service.saveAuthContentType(new AuthContentType(null, "AppLabel2", "ModelName2", new Date(), new Date()));
-
             service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", new Date(), new Date()));
 
             service.saveAuthRoleAuthPermission("1234","ROLE_USER");
 
-//            service.saveAuthUserAuthPermission("john@gmail.com","1234");
         };
     }
 }
