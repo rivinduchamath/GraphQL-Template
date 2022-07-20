@@ -22,8 +22,8 @@ public class AuthUser {
 
     @JsonIgnore  // Marker annotation that indicates that the annotated method or field is to be ignored by
                  // introspection-based serialization and deserialization functionality.
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authUser" )
-    Collection<AuthUserAuthRole> authUserAuthRoles = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authUser" , cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    List<AuthUserAuthRole> authUserAuthRoles = new ArrayList<>();
 
 
     @Temporal(TemporalType.TIMESTAMP)

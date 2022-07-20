@@ -28,6 +28,8 @@ public interface UserService {
 
     List<LoadAllDataWithRoles> getUserWithRoles();
 
+    List<AuthPermission>  getAuthPermission();
+
 
 //    void saveAuthUserAuthPermission(String email, String code);
 }

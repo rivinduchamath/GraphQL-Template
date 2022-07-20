@@ -1,6 +1,7 @@
 package com.cloudofgoods.authservice.controller;
 
 import com.cloudofgoods.authservice.dto.RoleToUserForm;
+import com.cloudofgoods.authservice.entity.AuthPermission;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
 import com.cloudofgoods.authservice.entity.customentity.LoadAllDataWithRoles;
@@ -40,13 +41,23 @@ public class AuthController {
     }
 
 
-    @GetMapping("/roles")
+    @GetMapping("/watch/roles")
     // ResponseEntity represents an HTTP response, including headers, body, and status
     // ResponseEntity from spring-web dependency
     // Method include Get Role Object
     public ResponseEntity<List<AuthRole>> getRoles() {
         return ResponseEntity.ok().body(userService.getAuthRoles());
     }
+
+
+    @GetMapping("/permission")
+    // ResponseEntity represents an HTTP response, including headers, body, and status
+    // ResponseEntity from spring-web dependency
+    // Method include Get Role Object
+    public ResponseEntity<List<AuthPermission>> getAuthPermission() {
+        return ResponseEntity.ok().body(userService.getAuthPermission());
+    }
+
 
     @PostMapping("/user/save")
     public ResponseEntity<AuthUser> saveUser(@RequestBody AuthUser user) {

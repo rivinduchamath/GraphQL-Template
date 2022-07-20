@@ -60,6 +60,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return ordersInfo;
     }
 
+    @Override
+    public List<AuthPermission> getAuthPermission() {
+        return authPermissionDAO.findAll();
+    }
+
 
     @Override
     public AuthUser saveAuthUser(AuthUser user) {

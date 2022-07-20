@@ -1,6 +1,7 @@
 package com.cloudofgoods.authservice.entity;
 
 import com.cloudofgoods.authservice.entity.embeddable.AuthRoleAuthPermissionPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,13 +17,17 @@ import java.util.Date;
 public class AuthRoleAuthPermission {
     @EmbeddedId
     private AuthRoleAuthPermissionPK authPermissionPK;
-    @ManyToOne( optional = false)
-    @MapsId("authRole")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //@ManyToOne( optional = false)
+   // @MapsId("authRole")
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    @JoinColumn(name="auth_role_id",referencedColumnName = "id", insertable = false, updatable = false)
     private AuthRole authRole;
-    @ManyToOne( optional = false)
-    @MapsId("authPermission")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    //@ManyToOne( optional = false)
+    //@MapsId("authPermission")
+    @JsonIgnore
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    @JoinColumn(name="auth_permission_id",referencedColumnName = "id", insertable = false, updatable = false)
     private AuthPermission authPermission;
 
 

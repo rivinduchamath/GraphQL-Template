@@ -1,5 +1,6 @@
 package com.cloudofgoods.authservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +24,9 @@ public class AuthPermission {
     @Column(unique = true)
     private String code;
 
-    @OneToMany(mappedBy="authPermission",fetch = FetchType.EAGER)
-    private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
+    @JsonIgnore
+    @OneToMany(mappedBy = "authPermission", cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    private List<AuthRoleAuthPermission> authRoleAuthPermissions;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

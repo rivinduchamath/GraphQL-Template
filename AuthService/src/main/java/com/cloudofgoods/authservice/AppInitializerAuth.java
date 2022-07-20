@@ -21,6 +21,7 @@ import java.util.List;
 @SpringBootApplication
 @EnableSwagger2
 public class AppInitializerAuth {
+    static List<AuthRole> AUTHROLES;
     public static void main(String[] args) {
 
         SpringApplication.run(AppInitializerAuth.class, args);
@@ -49,12 +50,15 @@ public class AppInitializerAuth {
             service.saveAuthUser(new AuthUser(null, "AMri", "123", new Date(), new Date()));
 
             service.addRoleToUser("john@gmail.com", "ROLE_USER");
-            service.addRoleToUser("Kamal", "ROLE_ADMIN");
+            service.addRoleToUser("Kamal", "ROLE_USER");
             service.addRoleToUser("AMri", "ROLE_ADMIN");
 
             service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", new Date(), new Date()));
 
             service.saveAuthRoleAuthPermission("1234","ROLE_USER");
+
+
+              AUTHROLES = service.getAuthRoles();
 
 
         };
