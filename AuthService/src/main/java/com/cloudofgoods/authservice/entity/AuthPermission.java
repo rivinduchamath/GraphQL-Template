@@ -26,12 +26,11 @@ public class AuthPermission {
 //    @JoinColumn(nullable = false)
 //    private AuthContentType authContentType;
 
-    @OneToMany(mappedBy = "authPermission", cascade = CascadeType.PERSIST)
-    private Set<AuthUserAuthPermission> authUsers = new HashSet<>();
+//    @OneToMany(mappedBy = "authPermission", cascade = CascadeType.PERSIST)
+//    private Set<AuthUserAuthPermission> authUsers = new HashSet<>();
 
     @OneToMany(mappedBy="authPermission")
     private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
-
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

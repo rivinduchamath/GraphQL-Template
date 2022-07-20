@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
 //    private final AuthContentTypeDAO authContentTypeDAO;
 
-    private final AuthUserAuthPermissionDAO authUserAuthPermissionDAO;
+//    private final AuthUserAuthPermissionDAO authUserAuthPermissionDAO;
     private final AuthRoleAuthPermissionDAO authRoleAuthPermissionDAO;
     @Override
     public List<AuthUser> getAuthUsers() {
@@ -86,17 +86,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         authRoleAuthPermissionDAO.save(authUserAuthRole);
     }
 
-    @Override
-    public void saveAuthUserAuthPermission(String email, String authPermissionCode) {
-        AuthUser user = authUserDAO.findAuthUserByEmail(email);
-        AuthPermission authPermission = authPermissionDAO.findAuthPermissionByCode(authPermissionCode);
-        log.info("Add Role " + authPermissionCode + " to the User " + email);
-        AuthUserAuthPermission authUserAuthPermission = new AuthUserAuthPermission(user.getId(), authPermission.getId(), new Date(), new Date());
-        authUserAuthPermission.setAuthPermission(authPermission);
-        authUserAuthPermission.setAuthUser(user);
-        authUserAuthPermissionDAO.save(authUserAuthPermission);
-
-    }
+//    @Override
+//    public void saveAuthUserAuthPermission(String email, String authPermissionCode) {
+//        AuthUser user = authUserDAO.findAuthUserByEmail(email);
+//        AuthPermission authPermission = authPermissionDAO.findAuthPermissionByCode(authPermissionCode);
+//        log.info("Add Role " + authPermissionCode + " to the User " + email);
+//        AuthUserAuthPermission authUserAuthPermission = new AuthUserAuthPermission(user.getId(), authPermission.getId(), new Date(), new Date());
+//        authUserAuthPermission.setAuthPermission(authPermission);
+//        authUserAuthPermission.setAuthUser(user);
+//        authUserAuthPermissionDAO.save(authUserAuthPermission);
+//
+//    }
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         AuthUser user = authUserDAO.findAuthUserByEmail(userName);

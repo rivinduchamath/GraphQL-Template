@@ -59,7 +59,7 @@ public class AppInitializerAuth {
 
             service.saveAuthRoleAuthPermission("1234","ROLE_USER");
 
-            service.saveAuthUserAuthPermission("john@gmail.com","1234");
+//            service.saveAuthUserAuthPermission("john@gmail.com","1234");
         };
     }
 }

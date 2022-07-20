@@ -19,8 +19,8 @@ public class AuthUser {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "authUser", cascade = CascadeType.PERSIST)
-    Collection<AuthUserAuthPermission> authPermissionSet = new HashSet<>();
+//    @OneToMany(mappedBy = "authUser", cascade = CascadeType.PERSIST)
+//    Collection<AuthUserAuthPermission> authPermissionSet = new HashSet<>();
 
     @OneToMany(mappedBy = "authUser")
     Collection<AuthUserAuthRole> authUserAuthRoles = new HashSet<>();

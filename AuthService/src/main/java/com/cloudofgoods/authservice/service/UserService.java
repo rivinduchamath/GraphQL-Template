@@ -26,5 +26,5 @@ public interface UserService {
 
     void saveAuthRoleAuthPermission(String authPermissionCode, String roleName);
 
-    void saveAuthUserAuthPermission(String email, String code);
+//    void saveAuthUserAuthPermission(String email, String code);
 }
