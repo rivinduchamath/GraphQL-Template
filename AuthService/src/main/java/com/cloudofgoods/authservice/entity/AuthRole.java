@@ -20,11 +20,11 @@ public class AuthRole implements Serializable {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "authRole")
+    @OneToMany(mappedBy = "authRole",fetch = FetchType.LAZY)
     private List<AuthRoleAuthPermission> authRoleAuthPermissions=new ArrayList<>();;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "authRole" , orphanRemoval = true)
+    @OneToMany(mappedBy = "authRole" , orphanRemoval = true ,fetch = FetchType.LAZY)
     private List<AuthUserAuthRole> authUserAuthRoles=new ArrayList<>();;
 
 

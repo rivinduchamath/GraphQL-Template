@@ -17,15 +17,17 @@ import java.util.Date;
 public class AuthUserAuthRole {
     @EmbeddedId
     private AuthUserAuthRolePK authRolePK;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER )
- //   @MapsId("userId")
- @JoinColumn(name = "auth_user_id",insertable = false, updatable = false)
+    @JsonIgnore //Marker annotation that indicates that the annotated method or field is to be ignored by
+                // introspection-based serialization and deserialization functionality.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
+// @JoinColumn(name = "auth_user_id",insertable = false, updatable = false)
     private AuthUser authUser;
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER )
-  //@MapsId("roleId")
-   @JoinColumn(name = "auth_role_id",insertable = false, updatable = false)
+    @JsonIgnore //Marker annotation that indicates that the annotated method or field is to be ignored by
+                // introspection-based serialization and deserialization functionality.
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("roleId")
+//   @JoinColumn(name = "auth_role_id",insertable = false, updatable = false)
     private AuthRole authRole;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,8 +36,8 @@ public class AuthUserAuthRole {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    public AuthUserAuthRole(Long userId,Long roleId, Date createdAt, Date updatedAt) {
-        this.authRolePK = new AuthUserAuthRolePK(userId,roleId);
+    public AuthUserAuthRole(Long userId, Long roleId, Date createdAt, Date updatedAt) {
+        this.authRolePK = new AuthUserAuthRolePK(userId, roleId);
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -53,6 +55,7 @@ public class AuthUserAuthRole {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
     public AuthUserAuthRole(AuthUser authUser, AuthRole authRole, Date createdAt, Date updatedAt) {
         this.authUser = authUser;
         this.authRole = authRole;

@@ -16,11 +16,11 @@ import java.util.Date;
 public class AuthRoleAuthPermission {
     @EmbeddedId
     private AuthRoleAuthPermissionPK authPermissionPK;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( optional = false)
     @MapsId("authRole")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private AuthRole authRole;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne( optional = false)
     @MapsId("authPermission")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private AuthPermission authPermission;

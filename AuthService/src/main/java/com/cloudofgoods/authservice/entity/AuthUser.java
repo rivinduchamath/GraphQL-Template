@@ -20,8 +20,9 @@ public class AuthUser {
     private String email;
     private String password;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "authUser" )
+    @JsonIgnore  // Marker annotation that indicates that the annotated method or field is to be ignored by
+                 // introspection-based serialization and deserialization functionality.
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authUser" )
     Collection<AuthUserAuthRole> authUserAuthRoles = new ArrayList<>();
 
 

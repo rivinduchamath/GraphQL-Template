@@ -22,7 +22,7 @@ public class AuthPermission {
     @Column(unique = true)
     private String code;
 
-    @OneToMany(mappedBy="authPermission")
+    @OneToMany(mappedBy="authPermission",fetch = FetchType.EAGER)
     private Set<AuthRoleAuthPermission> authRoleAuthPermissions;
 
     @Temporal(TemporalType.TIMESTAMP)
