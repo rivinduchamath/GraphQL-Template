@@ -4,7 +4,7 @@ package com.cloudofgoods.authservice.service;
 import com.cloudofgoods.authservice.entity.AuthPermission;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
-import com.cloudofgoods.authservice.entity.LoadAllDataWithRoles;
+import com.cloudofgoods.authservice.entity.customentity.LoadAllDataWithRoles;
 
 import java.util.List;
 

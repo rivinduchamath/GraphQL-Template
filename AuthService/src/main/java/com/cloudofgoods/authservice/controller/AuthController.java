@@ -3,7 +3,7 @@ package com.cloudofgoods.authservice.controller;
 import com.cloudofgoods.authservice.dto.RoleToUserForm;
 import com.cloudofgoods.authservice.entity.AuthRole;
 import com.cloudofgoods.authservice.entity.AuthUser;
-import com.cloudofgoods.authservice.entity.LoadAllDataWithRoles;
+import com.cloudofgoods.authservice.entity.customentity.LoadAllDataWithRoles;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

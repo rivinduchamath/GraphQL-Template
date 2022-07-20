@@ -1,12 +1,11 @@
 package com.cloudofgoods.authservice.service.serviceimpl;
 
 import com.cloudofgoods.authservice.entity.*;
-import com.cloudofgoods.authservice.entity.LoadAllDataWithRoles;
+import com.cloudofgoods.authservice.entity.customentity.LoadAllDataWithRoles;
 import com.cloudofgoods.authservice.repository.*;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,7 +31,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final AuthUserAuthRoleDAO authUserAuthRoleDAO;
     private final AuthRoleAuthPermissionDAO authRoleAuthPermissionDAO;
 
-    private final  CustomDAO customDAO;
+    private final  QueryDAO customDAO;
 
 
 
@@ -48,18 +47,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Get All Roles");
         return authRoleDAO.findAll();
     }
-//
-//    @Transactional(readOnly = true)
-//    @Override
-//    public List<OrderDTO2> getOrderInfo(String query)  {
-//        List<CustomEntity> ordersInfo = queryDAO.getOrdersInfo(query + "%");
-//        List<OrderDTO2> dtos = new ArrayList<>();
-//        for (CustomEntity info : ordersInfo) {
-//            dtos.add(new OrderDTO2(info.getOrderId(),
-//                    new java.sql.Date(info.getOrderDate().getTime()), info.getCustomerId(), info.getCustomerName(), info.getOrderTotal()));
-//        }
-//        return dtos;
-//    }
+
     @Override
     public List<LoadAllDataWithRoles> getUserWithRoles() {
         log.info("Get All Roles");
@@ -69,7 +57,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             System.out.println(a);
         }
 
-        return null;
+        return ordersInfo;
     }
 
 
