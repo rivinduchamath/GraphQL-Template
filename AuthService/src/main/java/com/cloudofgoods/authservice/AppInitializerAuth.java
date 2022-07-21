@@ -50,7 +50,7 @@ public class AppInitializerAuth {
             service.saveAuthUser(new AuthUser(null, "AMri", "123", new Date(), new Date()));
 
             service.addRoleToUser("john@gmail.com", "ROLE_USER");
-            service.addRoleToUser("Kamal", "ROLE_USER");
+            service.addRoleToUser("Kamal", "ROLE_ADMIN");
             service.addRoleToUser("AMri", "ROLE_ADMIN");
 
             service.saveAuthPermission(new AuthPermission(null, "XYZ", "1234", new Date(), new Date()));

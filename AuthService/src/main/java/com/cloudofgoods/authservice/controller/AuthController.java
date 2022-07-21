@@ -32,7 +32,7 @@ public class AuthController {
     }
 
 
-    @GetMapping("/users")
+    @GetMapping("/user")
     // ResponseEntity represents an HTTP response, including headers, body, and status
     // ResponseEntity from spring-web dependency
     // Method include Get User Object

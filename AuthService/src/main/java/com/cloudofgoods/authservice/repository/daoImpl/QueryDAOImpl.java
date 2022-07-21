@@ -20,7 +20,7 @@ public class QueryDAOImpl implements QueryDAO {
     public List<LoadAllDataWithRoles> getOrdersInfo() {
         List<Object[]> resultList;
         resultList = entityManager.createNativeQuery("select\n" +
-                        "    authuser.auth_user_id as auth_use2_4_0_,\n" +
+                        "    authuser.auth_user_id ,\n" +
                         "    authuser.auth_role_id as auth_rol1_4_0_,\n" +
                         "    authuser.created_at as created_3_4_1_,\n" +
                         "    authuser.updated_at as updated_4_4_1_,\n" +

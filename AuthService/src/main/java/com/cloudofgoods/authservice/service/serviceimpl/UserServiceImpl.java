@@ -6,6 +6,7 @@ import com.cloudofgoods.authservice.repository.*;
 import com.cloudofgoods.authservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -112,20 +113,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        AuthUser user = authUserDAO.findAuthUserByEmail(userName);
-        if (user == null) {
+        Optional<AuthUser> user = authUserDAO.findByEmail(userName);
+      /*  if (user == null) {
             log.error("User Name " + userName + " Not Found in the database");
             throw new UsernameNotFoundException("User Not Found on database");
         } else {
             log.info("User Name " + userName + " Found in the database");
-        }
-        // Create Collection to add Authorities of User
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        }*/
+        user.orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
 
-        user.getAuthUserAuthRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getAuthRole().getName()));
-        });
-        // Return Username, Password List of authorities
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+        UserDetails userDetails = new AuthUserDetail(user.get());
+        new AccountStatusUserDetailsChecker().check(userDetails);
+        return userDetails;
     }
 }

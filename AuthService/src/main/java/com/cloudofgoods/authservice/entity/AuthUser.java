@@ -20,7 +20,7 @@ public class AuthUser {
     private String email;
     private String password;
 
-    @JsonIgnore  // Marker annotation that indicates that the annotated method or field is to be ignored by
+    //@JsonIgnore  // Marker annotation that indicates that the annotated method or field is to be ignored by
                  // introspection-based serialization and deserialization functionality.
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "authUser" , cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
     List<AuthUserAuthRole> authUserAuthRoles = new ArrayList<>();
@@ -38,5 +38,14 @@ public class AuthUser {
         this.password = password;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public AuthUser(AuthUser user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.createdAt = user.getCreatedAt();
+        this.updatedAt = user.getUpdatedAt();
+        this.authUserAuthRoles = user.getAuthUserAuthRoles();
     }
 }

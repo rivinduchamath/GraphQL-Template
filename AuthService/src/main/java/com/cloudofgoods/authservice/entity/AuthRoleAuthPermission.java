@@ -18,16 +18,16 @@ public class AuthRoleAuthPermission {
     @EmbeddedId
     private AuthRoleAuthPermissionPK authPermissionPK;
     //@ManyToOne( optional = false)
-   // @MapsId("authRole")
+   @MapsId("authRole")
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
-    @JoinColumn(name="auth_role_id",referencedColumnName = "id", insertable = false, updatable = false)
+   // @JoinColumn(name="auth_role_id",referencedColumnName = "id", insertable = false, updatable = false)
     private AuthRole authRole;
     //@ManyToOne( optional = false)
-    //@MapsId("authPermission")
+    @MapsId("authPermission")
     @JsonIgnore
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
-    @JoinColumn(name="auth_permission_id",referencedColumnName = "id", insertable = false, updatable = false)
+ //   @JoinColumn(name="auth_permission_id",referencedColumnName = "id", insertable = false, updatable = false)
     private AuthPermission authPermission;
 
 

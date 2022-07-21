@@ -1,18 +1,18 @@
 package com.cloudofgoods.authservice.configaration;
 
-import com.cloudofgoods.authservice.entity.AuthPermission;
-import com.cloudofgoods.authservice.entity.AuthRole;
+import com.cloudofgoods.authservice.handler.AdminAuthenticationEntryPoint;
+import com.cloudofgoods.authservice.handler.UrlAccessDeniedHandler;
 import com.cloudofgoods.authservice.entity.AuthUser;
 import com.cloudofgoods.authservice.filter.CustomAuthenticationFilter;
 import com.cloudofgoods.authservice.filter.CustomAuthorizationFilter;
 import com.cloudofgoods.authservice.repository.AuthUserDAO;
 import com.cloudofgoods.authservice.service.UserService;
-import com.cloudofgoods.authservice.service.serviceimpl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,9 +20,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.http.HttpMethod.GET;
@@ -36,6 +33,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
     Spring MVC integration.*/
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {/* WebSecurityConfigurerAdapter, Tell to the spring How we want
                                                                         to manage application to the users and the security in application
                                                                         (Allows customization to both WebSecurity and HttpSecurity) */
@@ -43,11 +41,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {/* WebSecur
                                                              authentication and authorization information. (feed the user information to the Spring security API.)*/
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+    //  403 response content when the user accesses the unauthorized interface
+    private final UrlAccessDeniedHandler urlAccessDeniedHandler;
+
+
+     // Exception handling of access authority authentication
+    private final AdminAuthenticationEntryPoint adminAuthenticationEntryPoint;
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {  /*AuthenticationManagerBuilder Allows for easily
                                                                                  building in memory authentication,
                                                                                  LDAP authentication, JDBC based authentication etc...*/
-
+/*
+        auth.inMemoryAuthentication()
+                .withUser("user")
+                .password("password")
+                .roles("USER")
+                .and()
+                .withUser("admin")
+                .password("password")
+                .roles("ADMIN");*/
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder); // Defined PasswordEncoder bean in Main Class
     }
 
@@ -69,16 +83,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {/* WebSecur
         CustomAuthenticationFilter customAuthenticationFilter =
                 new CustomAuthenticationFilter(authenticationManagerBean());// calling authenticationManagerBean() bean
         customAuthenticationFilter.setFilterProcessesUrl("/api/v5/login");
-        http.csrf().disable();
+        http.csrf().disable().cors();
+
+        // Authentication not logged in exception
+        http.exceptionHandling().authenticationEntryPoint(adminAuthenticationEntryPoint);
+        // Customize 403 response content when accessing unauthorized interface after login
+        http.exceptionHandling().accessDeniedHandler(urlAccessDeniedHandler);
+
+
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         // Allow to access Request from Below any URLs
         http.authorizeRequests().antMatchers("/api/v5/login/**", "/api/v5/token/refresh/**").permitAll();
         http.authorizeRequests().antMatchers(PUBLIC_URLS).permitAll();
         // Allow to access Request from Below URLs with having authorized Roles
-        http.authorizeRequests().antMatchers(GET, "/api/v5/users/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(GET, "/api/v5/permission/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/api/v5/user/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER");
+        // http.authorizeRequests().antMatchers(GET, "/api/v5/permission/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST, "/api/v5/user/save/**").hasAnyAuthority("ROLE_ADMIN");
-        http.authorizeRequests().antMatchers(GET, "/api/v5/watch/roles/**").hasAnyAuthority("ROLE_ADMIN");
+        // http.authorizeRequests().antMatchers(GET, "/api/v5/watch/roles/**").hasAnyAuthority("ROLE_ADMIN");
         // http.authorizeRequests().antMatchers(POST, "/api/user/update/**").hasAnyAuthority("ROLE_SUPER_ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
