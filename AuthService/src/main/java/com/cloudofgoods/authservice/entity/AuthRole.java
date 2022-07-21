@@ -20,13 +20,12 @@ public class AuthRole implements Serializable {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "authRole",fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
-    private List<AuthRoleAuthPermission> authRoleAuthPermissions=new ArrayList<>();;
+    @OneToMany(mappedBy = "authRole", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    private List<AuthRoleAuthPermission> authRoleAuthPermissions = new ArrayList<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "authRole" , orphanRemoval = true ,fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
-    private List<AuthUserAuthRole> authUserAuthRoles=new ArrayList<>();;
-
+    @OneToMany(mappedBy = "authRole", orphanRemoval = true, fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE})
+    private List<AuthUserAuthRole> authUserAuthRoles = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;

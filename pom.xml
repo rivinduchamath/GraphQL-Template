@@ -11,6 +11,7 @@
     <modules>
         <module>UserService</module>
         <module>AuthService</module>
+        <module>AuthServiceWithDBRoutes</module>
     </modules>
 
     <properties>
